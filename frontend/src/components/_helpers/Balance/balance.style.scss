@@ -1,0 +1,31 @@
+@import 'src/components/share/variables.style';
+
+html {
+  .balance {
+    width: fit-content;
+    width: 150px;
+    margin: 0 10px 0 0;
+    div {
+      input {
+        font-weight: bold;
+        padding: 12px  0 12px  12px;
+        text-align: end;
+      }
+    }
+  }
+
+  .negative {
+    font-weight: bold;
+    color: #{$negative};
+    input {
+    color: #{$negative};
+    }
+  }
+  .positive {
+    font-weight: bold;
+    color: #{$positive};
+    input {
+      color: #{$positive};
+    }
+  }
+}

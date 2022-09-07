@@ -1,0 +1,7 @@
+development:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { ENV["REDIS_CACHE_URL"] } %>
+  channel_prefix: elk_dev
+
+test:
+  adapter: async

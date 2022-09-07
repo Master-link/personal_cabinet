@@ -1,0 +1,173 @@
+<% extend ActionView::Helpers::NumberHelper %>
+<% extend NumbersAndWords %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <style type="text/css">
+    body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial"; font-size:small }
+    .doc { 
+        width: 210mm;
+    }
+    .doc_title { 
+        font-size: large;
+        font-weight: bold;
+        border-bottom: 2px solid black;
+        padding: 2px;
+    }
+
+    .row { padding: 2mm;
+           display: block;
+           margin: 0;}
+    .row div { display: inline-block; }
+
+    .doc.row{
+      display: block;
+      margin: 0;
+    }
+
+    .col_1 { width:  16.5mm;  }
+    .col_2 { width:  33mm;    }
+    .col_3 { width:  49.5mm;  }
+    .col_4 { width:  66mm;    }
+    .col_5 { width:  82.5mm;  }
+    .col_6 { width:  99mm;    }
+    .col_7 { width:  115.5mm; }
+    .col_8 { width:  132mm;   }
+    .col_9 { width:  148.5mm; }
+    .col_10 { width: 165mm;   }
+    .col_11 { width: 181.5mm; }
+    .col_12 { width: 198mm;   }
+    
+    .bold { font-weight: bold; }
+
+    .text_left { text-align: left; }
+    .text_right { text-align: right; }
+    .text_center { text-align: center; }
+    .text_xx_small { font-size: xx-small; }
+    .text_top { vertical-align: top; }
+    #stamp { width: 200px; float: right; margin-top: -120px;}
+
+    table {
+        border-collapse: collapse; 
+        border: 0.7mm solid black; 
+        text-align: center;
+    }
+    table thead tr { border-bottom: 0.5mm solid black; }
+    table thead tr td { 
+        font-weight: bold;
+        font-size: small;
+        white-space: nowrap;
+    }
+    table td { 
+        border-right: 0.5mm solid black;  
+        padding: 1mm;
+    }
+    table td:last-child { border-right: none; }
+
+    .bottom_bordered { border-bottom: 0.3mm solid black;  }
+    #director_name_description { padding: 0; margin-top: -2mm; }
+
+  </style>
+  
+</head>
+
+<body>
+    <div class="doc">
+        <div class="doc_title">Акт № <%= document.id %> от <%= document.creation_datetime %>. Номер реализации - <%= document.payment_transaction.detail.dig('document_number') %></div>
+        <div class="row">
+            <div class="col_3 text_top"><span>Исполнитель</span></div>
+            <div class="col_9 bold"><%= document.tariff.service.legal_entity.name %>, ИНН <%= document.tariff.service.legal_entity.inn %>, КПП <%= document.tariff.service.legal_entity.kpp %>, <%= document.tariff.service.legal_entity.address %>, тел.: <%= document.tariff.service.legal_entity.phone %></div>
+        </div>
+        <div class="row">
+            <div class="col_3 text_top">Заказчик:</div>
+            <div class="col_9 bold">
+              <%= client_requisites %>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="bordered bold_border text_center">
+                <thead>
+                    <tr>
+                        <td>№</td>
+                        <td width="100%">Наименование работ, услуг</td>
+                        <td>Кол-во</td>
+                        <td>Ед.</td>
+                        <td>Цена</td>
+                        <td>Сумма</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="text_left"><%= subject %></td>
+                        <td>1</td>
+                        <td>шт</td>
+                        <td nowrap><%= number_with_delimiter(document.price.to_f) %></td>
+                        <td nowrap><%= number_with_delimiter(document.price.to_f) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col_10 text_right bold text_top">Итого:</div>
+            <div class="col_2 bold text_center"><%= document.price.to_s %></div>
+            <div class="col_10 text_right bold text_top">Без налога (НДС):</div>
+            <div class="col_2 bold text_center"> - </div>
+        </div>
+
+        <div class="row">
+          <div class="col_12">
+            Всего оказано услуг 1, на сумму
+            <%
+              currency = document.currency
+              price = document.price.truncate
+              subunit = ((document.price - price) * 100).truncate
+              translate_base_path = "currencies.#{currency.iso4217_code}"
+            %>
+            <%= number_to_currency(document.price, unit: t("currencies.#{currency.iso4217_code}.abbreviated"), format: "%n %u", delimiter: " ") %>
+          </div>
+          <div class="col_12 bold">
+            <%= price.to_words(gender: t("#{translate_base_path}.gender").to_sym) %>
+            <%= t(translate_base_path, count: price) %>
+            <%= subunit.to_words(gender: t("#{translate_base_path}.gender").to_sym) %>
+            <%= t("#{translate_base_path}.subunit", count: subunit) %>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col_12">Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг не имеет.</div>
+        </div>
+
+        <div class="row">
+            <div class="col_5">
+                <span class="bold">Исполнитель</span><br>
+                <span >Директор</span>
+            </div>
+            <div class="col_1"></div>
+            <div class="col_6">
+                <span class="bold">Заказчик</span><br>&nbsp;
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col_5 bottom_bordered"></div>
+            <div class="col_1"></div>
+            <div class="col_6 bottom_bordered"></div>
+        </div>
+        <div class="row" id="director_name_description">
+            <div class="col_5 text_center"><%= document.tariff.service.legal_entity.director_name %></div>
+        </div>
+        <div class="row col_5 text_center">
+          <% if document.tariff.service.legal_entity.stamp_file %><img id="stamp" src="data:image/png;base64,<%= Base64.encode64(document.tariff.service.legal_entity.stamp_file.read) %>" alt=""><% end %>
+        </div>
+    </div>
+</body>
+
+</html>

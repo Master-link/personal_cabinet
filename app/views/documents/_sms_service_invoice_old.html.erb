@@ -1,0 +1,214 @@
+<% extend ActionView::Helpers::NumberHelper %>
+<% extend NumbersAndWords %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 5.2.5.1 (Linux)"/>
+  <meta name="created" content="2017-04-04T15:34:37.413025700"/>
+  <meta name="changed" content="2017-04-04T15:34:37.413025700"/>
+  
+  <style type="text/css">
+    body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial"; font-size:small }
+    .doc { 
+        width: 210mm;
+    }
+    .doc_title { 
+        font-size: large;
+        font-weight: bold;
+        border-bottom: 2px solid black;
+        padding: 2px;
+    }
+
+    .row { padding: 2mm; }
+    .only_margin { padding: 0; margin: 5mm 0;  }
+    .row div { display: inline-block; }
+
+    .col_1 { width:  16.5mm;  }
+    .col_2 { width:  33mm;    }
+    .col_3 { width:  49.5mm;  }
+    .col_4 { width:  66mm;    }
+    .col_5 { width:  82.5mm;  }
+    .col_6 { width:  99mm;    }
+    .col_7 { width:  115.5mm; }
+    .col_8 { width:  132mm;   }
+    .col_9 { width:  148.5mm; }
+    .col_10 { width: 165mm;   }
+    .col_11 { width: 181.5mm; }
+    .col_12 { width: 198mm;   }
+    
+    .bold { font-weight: bold; }
+
+    .text_left { text-align: left; }
+    .text_right { text-align: right; }
+    .text_center { text-align: center; }
+    .text_small {  font-size: small; }
+    .text_xx_small { font-size: xx-small; }
+    .text_large { font-size: large; }
+    .text_top { vertical-align: top; }
+    
+    table { border-collapse: collapse;}
+    table td { padding: 0.5mm; vertical-align: top; }
+    table tbody td{ font-size: small; }
+
+    .bordered { border: solid black;  }
+    .bottom_bordered { border-bottom: solid black;  }
+    .top_bordered { border-top: solid black;  }
+    .left_bordered { border-left: solid black;  }
+    .right_bordered { border-right: solid black;  }
+    
+    .bold_border { border-width: 0.7mm; }
+    .slim_border { border-width: 0.35mm; }
+
+    #director_name_description { padding: 0; margin-top: -2mm; }
+    #table_as_title { border-collapse: separate; margin: 0 auto; }
+    #table_as_title td { padding: 2mm 10mm; }
+ 
+    .purple_background { background-color: rgb(83, 106, 194); color: white; }
+    #tiles div { padding: 3mm 7mm; }
+    #stamp { width: 200px; float: right; margin-top: -120px;}
+  </style>
+  
+</head>
+
+<body>
+    <div class="doc">
+        <table class="bordered slim_border">
+            <tr>
+                <td class="col_8 right_bordered bold_border" colspan=4><%= object.legal_entity.bank_name %></td>
+                <td class="col_2 right_bordered bottom_bordered bold_border" >БИК</td>
+                <td class="col_2" ><%= object.legal_entity.bik %></td>
+            </tr>
+            <tr>
+                <td class="right_bordered bold_border" colspan=4></td>
+                <td class="right_bordered bold_border">Сч. №</td>
+                <td><%= object.legal_entity.bank_account %></td>
+            </tr>
+            <tr>
+                <td class="text_xx_small right_bordered bottom_bordered bold_border" colspan=4>Банк получателя</td>
+                <td class="right_bordered bottom_bordered bold_border"></td>
+                <td class="bottom_bordered bold_border"></td>
+            </tr>
+            <tr>
+                <td class="bottom_bordered slim_border">ИНН</td>
+                <td class="bottom_bordered slim_border"><%= object.legal_entity.inn %></td>
+                <td class="left_bordered bold_border">КПП</td>
+                <td class="right_bordered bold_border"><%= object.legal_entity.kpp %></td>
+                <td class="right_bordered bold_border">Сч. №</td>
+                <td class="left_bordered bold_border"><%= object.legal_entity.account %></td>
+            </tr>
+            <tr>
+                <td class="right_bordered slim_border" colspan=4><%= object.legal_entity.name %></td>
+                <td></td>
+                <td class="left_bordered bold_border"></td>
+            </tr>
+            <tr>
+                <td class="right_bordered slim_border" colspan=4><br></td>
+                <td><br></td>
+                <td class="left_bordered bold_border"><br></td>
+            </tr>
+            <tr>
+                <td class="right_bordered slim_border text_xx_small" colspan=4>Получатель</td>
+                <td></td>
+                <td class="left_bordered bold_border"></td>
+            </tr>
+        </table>
+    
+        <br>
+        <table class="bold bordered slim_border" id="table_as_title">
+            <tr>
+                <td class="bordered slim_border text_large">Обратите внимание</td>
+            </tr>
+        </table>  
+
+        <div class="row bold only_margin" id="tiles">
+            <div class="col_2 purple_background text_center">Без НДС</div>
+            <div class="col_8 text_center">Мы работаем по упрощенной системе налогообложения. НДС не облагается!</div>
+        </div> 
+        <div class="row bold only_margin" id="tiles">
+            <div class="col_2 purple_background text_center">Назначение платежа</div>
+            <div class="col_8">Просим вас в назначении платежа указывать:<br>Оплата по счету №<%= object.document.id%> от <%= object.document.creation_datetime.strftime('%d.%m.%Y') %> г. за <%= object.service.name %>. Без НДС.</div>
+        </div> 
+        <div class="row bold only_margin" id="tiles">
+            <div class="col_2 purple_background text_center text_top">Плательщик</div>
+            <div class="col_8">Оплата по счету действительна только от ПОКУПАТЕЛЯ, указанного в данном счете. В противном случае денежные средства будут возвращены как ошибочно перечисленные.</div>
+        </div>    
+
+        <div class="doc_title">Счет на оплату №<%= object.document.id%> от <%= object.document.creation_datetime.strftime('%d.%m.%Y') %> г.</div>
+        <div class="row">
+            <div class="col_3 text_top"><span>Поставщик:</span></div>
+            <div class="col_9 bold"><%= object.legal_entity.name %>, ИНН <%= object.legal_entity.inn %>, КПП <%= object.legal_entity.kpp %>, <%= object.legal_entity.address %>, тел.: <%= object.legal_entity.phone %></div>
+        </div>
+        <div class="row">
+            <div class="col_3 text_top">Покупатель:</div>
+            <div class="col_9 bold">
+                <%= object.client_requisites %>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="bordered bold_border text_center">
+                <thead class="bold">
+                    <tr>
+                        <td class="col_1 slim_border bottom_bordered right_bordered">№</td>
+                        <td class="col_7 slim_border bottom_bordered right_bordered">Товары (работы, услуги)</td>
+                        <td class="col_1 slim_border bottom_bordered right_bordered">Кол-во</td>
+                        <td class="col_1 slim_border bottom_bordered right_bordered">Ед.</td>
+                        <td class="col_1 slim_border bottom_bordered right_bordered">Цена</td>
+                        <td class="col_1 slim_border bottom_bordered">Сумма</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="slim_border right_bordered">1</td>
+                        <td class="slim_border right_bordered text_left"><%= object.document_subject%></td>
+                        <td class="slim_border right_bordered">1</td>
+                        <td class="slim_border right_bordered">шт</td>
+                        <td class="slim_border right_bordered"><%= number_with_delimiter(object.document.price.to_f) %></td>
+                        <td class="slim_border right_bordered"><%= number_with_delimiter(object.document.price.to_f) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row text_large">
+            <div class="col_10 text_right bold text_top">Итого:</div>
+            <div class="col_2 bold text_center"><%= object.document.price.to_s %></div>
+            <div class="col_10 text_right bold text_top">Без налога (НДС):</div>
+            <div class="col_2 bold text_center"> - </div>
+            <div class="col_10 text_right bold text_top">Всего к оплате</div>
+            <div class="col_2 bold text_center"><%= object.document.price.to_s %></div>
+        </div>
+
+        <div class="row">
+            <div class="col_12 text_small">
+                Всего оказано услуг 1, 
+                <%= number_to_currency(object.document.price, unit: "руб.", format: "%n %u", delimiter: " ") %>
+            </div>
+            <div class="col_12 text_small bold">
+                <%= object.document.price.to_s.split(".").first.to_i.to_words %> рублей 
+                <%= object.document.price.to_s.split(".").second.to_i.to_words %> копеек
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col_12 bottom_bordered bold_border"></div>
+        </div>
+
+        <div class="row">
+            <div class="col_2 bold text_small">Руководитель</div>
+            <div class="col_4 bottom_bordered slim_border text_right" id="little"><span class="text_xx_small"><%= object.legal_entity.director_name %></span></div>
+            <div class="col_2 bold text_small text_center">Бухгалтер</div>
+            <div class="col_4 bottom_bordered slim_border"><%= object.legal_entity.accountant %></div>
+        </div>
+        <div class="row">
+          <% if object.stamp_file %><img id="stamp" src="data:image/png;base64,<%= Base64.encode64(object.stamp_file.read) %>" alt=""><% end %>
+        </div>
+    </div>
+</body>
+
+</html>

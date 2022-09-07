@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "properties": {
+    "subscribe_price": {
+      "type": "number"
+    },
+    "new_tariff": {
+      "pattern": "true"
+    },
+    "new_tariff_hours": {
+      "type": "string"
+    },
+    "new_tariff_slas": {
+      "type": "string"
+    },
+    "renewal": {
+      "type": "boolean"
+    }
+  },
+  "required": ["subscribe_price", "new_tariff", "new_tariff_hours", "new_tariff_slas"]
+}

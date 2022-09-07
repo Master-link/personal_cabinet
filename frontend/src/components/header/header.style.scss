@@ -1,0 +1,141 @@
+@import "../share/variables.style.scss";
+
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+  .logo-container {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+  }
+
+  .options {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .option {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  }
+}
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+html {
+  #wrapper2 {
+    display: flex;
+    width: 100%;
+  }
+  .navbar_layer {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer_layer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #select-flag-label {
+    white-space: nowrap;
+  }
+  .flag {
+    width: 28px;
+    margin-right: 10px;
+  }
+  .bg_blue {
+    background: #{$first};
+  }
+  .sidebar {
+    .last-nav {
+      .nav-link.primary {
+        color: white;
+      }
+    }
+    .nav-item {
+      .badge_menu {
+        .MuiBadge-badge {
+          font-size: 0.8rem;
+          padding: 4px 6px;
+          right: -6px;
+        }
+      }
+      .profile {
+        width: 100%;
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        text-align: left;
+        align-items: center;
+        justify-content: flex-start;
+        text-decoration: none;
+        padding-right: 5px;
+        a {
+          display: flex;
+          align-items: center;
+          padding: 1rem 0 1rem 0.2rem;
+          span {
+            display: block;
+            &:first-of-type {
+              margin: 0 5px 0 0;
+            }
+            span {
+              &:last-of-type {
+                color: #cccccc;
+                font-size: 13px;
+              }
+            }
+
+          }
+        }
+
+        .elk-profile{
+          color: #fafafa;
+          background-color: #bdbdbd;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          overflow: hidden;
+          font-size: 1.25rem;
+          align-items: center;
+          flex-shrink: 0;
+          user-select: none;
+          border-radius: 50%;
+          justify-content: center;
+          text-transform: uppercase;
+        }
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  } 
+  
+}
+
+.last-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  // height: 100%;
+}
+
+.documentPopup .MuiDialogContent-root {
+  padding: 0;
+}

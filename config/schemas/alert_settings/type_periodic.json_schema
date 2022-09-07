@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "properties": {
+    "type": { 
+      "pattern": "type_periodic"
+    },
+    "before_days": { 
+      "type": "array"
+    }
+  },
+  "required": ["type", "before_days"]
+}

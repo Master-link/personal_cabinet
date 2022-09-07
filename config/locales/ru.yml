@@ -1,0 +1,68 @@
+ru:
+  document_types:
+    sms_service_act: 'Акт об оказании услуг'
+    sms_service_invoice: 'Счет на оплату'
+  client_requisite:
+    company_type: '%{count}'
+    inn: 'ИНН %{count}'
+    kpp: 'КПП %{count}'
+    full_name: '%{count}'
+    head_chief: '%{count}'
+    act_because_of: '%{count}'
+    head_chief_signature: '%{count}'
+    address: '%{count}'
+    bank_checking_account: '%{count}'
+    bank_cash_account: '%{count}'
+    bank_name: '%{count}'
+    bank_bik: '%{count}'
+    phone: 'тел.: %{count}'
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      myformat: "%d %B %Y"
+  hello: "Привет"
+  dry_validation:
+    errors:
+      rules:
+        password:
+          invalid: 'неправильный формат'
+  currencies:
+    RUB:
+      gender: 'male'
+      abbreviated: 'руб.'
+      zero: 'рублей'
+      one: 'рубль'
+      few: 'рубля'
+      many: 'рублей'
+      other: 'рублей'
+      subunit:
+        gender: 'female'
+        abbreviated: 'коп.'
+        zero: 'копеек'
+        one: 'копейка'
+        few: 'копейки'
+        many: 'копеек'
+        other: 'копеек'
+    KZT:
+      gender: 'male'
+      abbreviated: 'тенге'
+      zero: 'тенге'
+      one: 'тенге'
+      few: 'тенге'
+      many: 'тенге'
+      other: 'тенге'
+      subunit:
+        gender: 'male'
+        abbreviated: 'тиын'
+        zero: 'тиын'
+        one: 'тиын'
+        few: 'тиына'
+        many: 'тиын'
+        other: 'тиын'
+  trigger:
+    voice_robot: 'Включить мониторинг по балансу ГР'
+    sms: 'Включить мониторинг по балансу СМС'
+    comes_expire_trigger: 'Включить мониторинг по дате окончания подписки'
+    monitoring_tms: 'Включить мониторинг - ТМ сервера'
+    monitoring_smpp: 'Включить мониторинг - по SMPP аккаунту'
+    monitoring_backup: 'Включить мониторинг - уведомления по бекапу'

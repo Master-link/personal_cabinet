@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:10.3-alpine'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    env_file:
+      - '.env'
+
+  maildrive:
+    build: ./postfix
+    stdin_open: true
+
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+
+  website:
+    container_name: website
+    stdin_open: true
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build: .
+    ports:
+      - '3011:3011'
+      - '465:465'
+    volumes:
+      - '.:/app'
+    env_file:
+      - '.env'
+
+  frontend:
+    container_name: frontend
+    image: "node:14-alpine"
+    user: "node"
+    working_dir: /myapp/frontend
+    stdin_open: true
+    ports:
+      - '3010:3010'
+    volumes:
+      - ./frontend:/myapp/frontend
+    command: "yarn start"
+    depends_on:
+      - 'website'
+
+volumes:
+  redis:
+  postgres:
+  website:

@@ -1,0 +1,129 @@
+body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial"; font-size:small }
+.doc_invoice {
+  width: 210mm;
+
+  .doc_title {
+      font-size: large;
+      font-weight: bold;
+      border-bottom: 2px solid black;
+      padding: 2px;
+  }
+
+  .row { padding: 4mm; }
+  .only_margin { padding: 0; margin: 5mm 0;  }
+  .row div { display: inline-block; }
+
+  .col_1 { width:  16.5mm;  }
+  .col_2 { width:  33mm;    }
+  .col_3 { width:  49.5mm;  }
+  .col_4 { width:  66mm;    }
+  .col_5 { width:  82.5mm;  }
+  .col_6 { width:  99mm;    }
+  .col_7 { width:  115.5mm; }
+  .col_8 { width:  132mm;   }
+  .col_9 { width:  148.5mm; }
+  .col_10 { width: 165mm;   }
+  .col_11 { width: 181.5mm; }
+  .col_12 { width: 198mm;   }
+
+  .bold { font-weight: bold; }
+
+  .text_left { text-align: left; }
+  .text_right { text-align: right; }
+  .text_center { text-align: center; }
+  .text_small {  font-size: small; }
+  .text_xx_small { font-size: xx-small; }
+  .text_large { font-size: large; }
+  .text_top { vertical-align: top; }
+
+  table { border-collapse: collapse;}
+  table td { padding: 0.5mm; vertical-align: top; }
+  table tbody td{ font-size: small; }
+
+  .bordered { border: solid black;  }
+  .bottom_bordered { border-bottom: solid black;  }
+  .top_bordered { border-top: solid black;  }
+  .left_bordered { border-left: solid black;  }
+  .right_bordered { border-right: solid black;  }
+
+  .bold_border { border-width: 0.7mm; }
+  .slim_border { border-width: 0.35mm; }
+
+  #director_name_description { padding: 0; margin-top: -2mm; }
+  #table_as_title { border-collapse: separate; margin: 10px auto 0; }
+  #table_as_title td { padding: 2mm 10mm; }
+
+  .purple_background { background-color: rgb(83, 106, 194); color: white; }
+  #tiles div { padding: 3mm 7mm; }
+  #stamp { width: 200px; float: left; margin-top: -80px; margin-left: 120px;}
+}
+
+.doc_invoice_html {
+  width: 210mm;
+
+  .doc_title {
+      font-size: large;
+      font-weight: bold;
+      border-bottom: 2px solid black;
+      padding: 2px;
+  }
+
+  .row {
+    position: absolute;
+    padding: 2mm;
+    display: block;
+    margin: 0;
+   }
+  .stamp_invoice {
+    position: relative;
+    padding: 2mm;
+    display: block;
+    margin: 0;
+  }
+  .only_margin { padding: 0; margin: 5mm 0;  }
+  .row div { display: inline-block; }
+
+  .col_1 { width:  16.5mm;  }
+  .col_2 { width:  33mm;    }
+  .col_3 { width:  49.5mm;  }
+  .col_4 { width:  66mm;    }
+  .col_5 { width:  82.5mm;  }
+  .col_6 { width:  99mm;    }
+  .col_7 { width:  115.5mm; }
+  .col_8 { width:  132mm;   }
+  .col_9 { width:  148.5mm; }
+  .col_10 { width: 165mm;   }
+  .col_11 { width: 181.5mm; }
+  .col_12 { width: 198mm;   }
+
+  .bold { font-weight: bold; }
+
+  .text_left { text-align: left; }
+  .text_right { text-align: right; }
+  .text_center { text-align: center; }
+  .text_small {  font-size: small; }
+  .text_xx_small { font-size: xx-small; }
+  .text_large { font-size: large; }
+  .text_top { vertical-align: top; }
+
+  table { border-collapse: collapse;}
+  table td { padding: 0.5mm; vertical-align: top; }
+  table tbody td{ font-size: small; }
+
+  .bordered { border: solid black;  }
+  .bottom_bordered { border-bottom: solid black;  }
+  .top_bordered { border-top: solid black;  }
+  .left_bordered { border-left: solid black;  }
+  .right_bordered { border-right: solid black;  }
+
+  .bold_border { border-width: 0.7mm; }
+  .slim_border { border-width: 0.35mm; }
+
+  #director_name_description { padding: 0; margin-top: -2mm; }
+  #table_as_title { border-collapse: separate; margin: 10px auto 0; }
+  #table_as_title td { padding: 2mm 10mm; }
+
+  .purple_background { background-color: rgb(83, 106, 194); color: white; }
+  #tiles div { padding: 3mm 7mm; }
+  #stamp { width: 200px; float: right; margin-top: -120px;}
+}

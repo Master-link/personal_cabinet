@@ -1,0 +1,9 @@
+[submodule "submodules/settings"]
+	path = submodules/settings
+	url = git@gl.bitmaster.ru:bitmaster/settings/schema.git
+[submodule "lib/bitmaster/platform/settings/client"]
+	path = lib/bitmaster/platform/settings/client
+	url = git@gl.bitmaster.ru:bitmaster/settings/schema.git
+[submodule "public/swagger"]
+	path = public/swagger
+	url = https://github.com/swagger-api/swagger-ui.git

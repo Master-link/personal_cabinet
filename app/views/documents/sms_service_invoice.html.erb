@@ -1,0 +1,163 @@
+<div class="doc_invoice">
+  <table class="bordered slim_border">
+    <tr>
+      <td class="col_8 right_bordered bold_border" colspan=4><%= document.tariff.service.legal_entity.bank_name %></td>
+      <td class="col_2 right_bordered bottom_bordered bold_border">БИК</td>
+      <td class="col_2"><%= document.tariff.service.legal_entity.bik %></td>
+    </tr>
+    <tr>
+      <td class="right_bordered bold_border" colspan=4></td>
+      <td class="right_bordered bold_border">Сч. №</td>
+      <td><%= document.tariff.service.legal_entity.bank_account %></td>
+    </tr>
+    <tr>
+      <td class="text_xx_small right_bordered bottom_bordered bold_border" colspan=4>Банк получателя</td>
+      <td class="right_bordered bottom_bordered bold_border"></td>
+      <td class="bottom_bordered bold_border"></td>
+    </tr>
+    <tr>
+      <td class="bottom_bordered slim_border">ИНН</td>
+      <td class="bottom_bordered slim_border"><%= document.tariff.service.legal_entity.inn %></td>
+      <td class="left_bordered bold_border">КПП</td>
+      <td class="right_bordered bold_border"><%= document.tariff.service.legal_entity.kpp %></td>
+      <td class="right_bordered bold_border">Сч. №</td>
+      <td class="left_bordered bold_border"><%= document.tariff.service.legal_entity.account %></td>
+    </tr>
+    <tr>
+      <td class="right_bordered slim_border" colspan=4><%= document.tariff.service.legal_entity.name %></td>
+      <td></td>
+      <td class="left_bordered bold_border"></td>
+    </tr>
+    <tr>
+      <td class="right_bordered slim_border" colspan=4><br></td>
+      <td><br></td>
+      <td class="left_bordered bold_border"><br></td>
+    </tr>
+    <tr>
+      <td class="right_bordered slim_border text_xx_small" colspan=4>Получатель</td>
+      <td></td>
+      <td class="left_bordered bold_border"></td>
+    </tr>
+  </table>
+
+  <table class="bold bordered slim_border" id="table_as_title">
+    <tr>
+      <td class="bordered slim_border text_large">Обратите внимание</td>
+    </tr>
+  </table>
+
+  <div class="row bold only_margin" id="tiles">
+    <div class="col_2 purple_background text_center">Без НДС</div>
+    <div class="col_8 text_center">Мы работаем по упрощенной системе налогообложения. НДС не облагается!</div>
+  </div>
+  <div class="row bold only_margin" id="tiles">
+    <div class="col_2 purple_background text_center">Назначение платежа</div>
+    <div class="col_8">
+      Просим вас в назначении платежа указывать:<br>
+      Оплата по счету №<%= document.id %> от <%= document.created_at.strftime('%d.%m.%Y') %> г.
+      за <%= document.tariff.service.name %>. Без НДС.
+    </div>
+  </div>
+
+  <div class="row bold only_margin" id="tiles">
+    <div class="col_2 purple_background text_center text_top">Плательщик</div>
+    <div class="col_8">
+      Оплата по счету действительна только от ПОКУПАТЕЛЯ, указанного в данном счете. В противном случае денежные
+      средства будут возвращены как ошибочно перечисленные.
+    </div>
+  </div>
+
+  <div class="doc_title">
+    Счет на оплату №<%= document.id %> от <%= document.created_at.strftime('%d.%m.%Y') %>г.
+  </div>
+
+  <div class="row">
+    <div class="col_3 text_top"><span>Поставщик:</span></div>
+    <div class="col_9 bold">
+      <%= document.tariff.service.legal_entity.name %>,
+      ИНН <%= document.tariff.service.legal_entity.inn %>,
+      КПП <%= document.tariff.service.legal_entity.kpp %>,
+      <%= document.tariff.service.legal_entity.address %>,
+      тел.: <%= document.tariff.service.legal_entity.phone %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col_3 text_top">Покупатель:</div>
+    <div class="col_9 bold">
+      <%= document.client.client_requisite.get_requisites_as_string(:full_name, :inn, :kpp, :address) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="bordered bold_border text_center">
+      <thead class="bold">
+      <tr>
+        <td class="col_1 slim_border bottom_bordered right_bordered">№</td>
+        <td class="col_7 slim_border bottom_bordered right_bordered">Товары (работы, услуги)</td>
+        <td class="col_1 slim_border bottom_bordered right_bordered">Кол-во</td>
+        <td class="col_1 slim_border bottom_bordered right_bordered">Ед.</td>
+        <td class="col_1 slim_border bottom_bordered right_bordered">Цена</td>
+        <td class="col_1 slim_border bottom_bordered">Сумма</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="slim_border right_bordered">1</td>
+        <td class="slim_border right_bordered text_left"><%= subject %></td>
+        <td class="slim_border right_bordered">1</td>
+        <td class="slim_border right_bordered">шт</td>
+        <td class="slim_border right_bordered"><%= number_with_delimiter(document.price.to_f) %></td>
+        <td class="slim_border right_bordered"><%= number_with_delimiter(document.price.to_f) %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row text_large">
+    <div class="col_10 text_right bold text_top">Итого:</div>
+    <div class="col_2 bold text_center"><%= document.price.to_s %></div>
+    <div class="col_10 text_right bold text_top">Без налога (НДС):</div>
+    <div class="col_2 bold text_center"> -</div>
+    <div class="col_10 text_right bold text_top">Всего к оплате</div>
+    <div class="col_2 bold text_center"><%= document.price.to_s %></div>
+  </div>
+
+  <div class="row">
+    <div class="col_12 text_small">
+      Всего оказано услуг 1, на сумму
+      <%
+        currency = document.currency
+        price = document.price.truncate
+        subunit = ((document.price - price) * 100).truncate
+        translate_base_path = "currencies.#{currency.iso4217_code}"
+      %>
+      <%= number_to_currency(document.price, unit: t("currencies.#{currency.iso4217_code}.abbreviated"), format: "%n %u", delimiter: " ") %>
+    </div>
+    <div class="col_12 text_small bold">
+      <%= price.to_words(gender: t("#{translate_base_path}.gender").to_sym) %>
+      <%= t(translate_base_path, count: price) %>
+      <%= subunit.to_words(gender: t("#{translate_base_path}.gender").to_sym) %>
+      <%= t("#{translate_base_path}.subunit", count: subunit) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col_12 bottom_bordered bold_border"></div>
+  </div>
+
+  <div class="row">
+    <div class="col_2 bold text_small">Руководитель</div>
+    <div class="col_4 bottom_bordered slim_border text_right" id="little">
+      <span class="text_xx_small"><%= document.tariff.service.legal_entity.director_name %></span>
+    </div>
+    <div class="col_2 bold text_small text_center">Бухгалтер</div>
+    <div class="col_4 bottom_bordered slim_border"><%= document.tariff.service.legal_entity.accountant %></div>
+  </div>
+
+  <div class="stamp_invoice">
+    <% if File.exist?(document.tariff.service.legal_entity.stamp_file) %>
+      <img id="stamp" src="data:image/png;base64,<%= Base64.encode64(document.tariff.service.legal_entity.stamp_file.read) %>" alt=""/>
+    <% end %>
+  </div>
+</div>

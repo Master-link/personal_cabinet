@@ -1,0 +1,54 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://github.com/rubocop-hq/rubocop/blob/master/manual/configuration.md
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - config/**/*
+    - public/**/*
+    - db/**/*
+    - app/models/ability.rb
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    # - spec/**/*
+
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrix/LineLength:
+  Max: 120
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+# Style/ClassAndModuleChildren:
+#   EnforcedStyle: 'compact'
+#   Exclude:
+#     - 'lib/bitmaster/optparse/main.rb'
+
+# Layout/EndOfLine:
+#   EnforcedStyle: 'lf'
+
+# Metrics/BlockLength:
+#   Exclude:
+#     - 'bitmaster-optparse.gemspec'

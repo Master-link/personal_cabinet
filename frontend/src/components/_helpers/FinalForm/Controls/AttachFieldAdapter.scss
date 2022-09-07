@@ -1,0 +1,25 @@
+@import 'src/components/share/variables.style.scss';
+
+.attach_file_adapter {
+  border: 1px #{$shadow} dashed;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.hidden {
+  display: none;
+}
+.w_100{
+  width: 100%;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.flex {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+}

@@ -1,0 +1,158 @@
+<% extend ActionView::Helpers::NumberHelper %>
+<% extend NumbersAndWords %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <style type="text/css">
+    body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial"; font-size:small }
+    .doc { 
+        width: 210mm;
+    }
+    .doc_title { 
+        font-size: large;
+        font-weight: bold;
+        border-bottom: 2px solid black;
+        padding: 2px;
+    }
+
+    .row { padding: 2mm; }
+    .row div { display: inline-block; }
+
+    .col_1 { width:  16.5mm;  }
+    .col_2 { width:  33mm;    }
+    .col_3 { width:  49.5mm;  }
+    .col_4 { width:  66mm;    }
+    .col_5 { width:  82.5mm;  }
+    .col_6 { width:  99mm;    }
+    .col_7 { width:  115.5mm; }
+    .col_8 { width:  132mm;   }
+    .col_9 { width:  148.5mm; }
+    .col_10 { width: 165mm;   }
+    .col_11 { width: 181.5mm; }
+    .col_12 { width: 198mm;   }
+    
+    .bold { font-weight: bold; }
+
+    .text_left { text-align: left; }
+    .text_right { text-align: right; }
+    .text_center { text-align: center; }
+    .text_xx_small { font-size: xx-small; }
+    .text_top { vertical-align: top; }
+    #stamp { width: 200px; float: right; margin-top: -120px;}
+
+    table {
+        border-collapse: collapse; 
+        border: 0.7mm solid black; 
+        text-align: center;
+    }
+    table thead tr { border-bottom: 0.5mm solid black; }
+    table thead tr td { 
+        font-weight: bold;
+        font-size: small;
+    }
+    table td { 
+        border-right: 0.5mm solid black;  
+        padding: 1mm;
+    }
+    table td:last-child { border-right: none; }
+    table tbody td{ font-size: xx-small; }
+
+    .bottom_bordered { border-bottom: 0.3mm solid black;  }
+    #director_name_description { padding: 0; margin-top: -2mm; }
+
+  </style>
+  
+</head>
+
+<body>
+    <div class="doc">
+        <div class="doc_title">Акт № <%= object.document.id %> от <%= object.document.creation_datetime %>. Номер реализации - <%= object.document.payment_transaction.document_number %></div>
+        <div class="row">
+            <div class="col_3 text_top"><span>Исполнитель</span></div>
+            <div class="col_9 bold"><%= object.legal_entity.name %>, ИНН <%= object.legal_entity.inn %>, КПП <%= object.legal_entity.kpp %>, <%= object.legal_entity.address %>, тел.: <%= object.legal_entity.phone %></div>
+        </div>
+        <div class="row">
+            <div class="col_3 text_top">Заказчик:</div>
+            <div class="col_9 bold">
+              <%= object.client_requisites %>
+            </div>
+        </div>
+
+        <div class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <td>№</td>
+                        <td>Наименование работ, услуг</td>
+                        <td>Кол-во</td>
+                        <td>Ед.</td>
+                        <td>Цена</td>
+                        <td>Сумма</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="text_left"><%= object.document_subject%></td>
+                        <td>1</td>
+                        <td>шт</td>
+                        <td><%= number_with_delimiter(object.document.price.to_f) %></td>
+                        <td><%= number_with_delimiter(object.document.price.to_f) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col_10 text_right bold text_top">Итого:</div>
+            <div class="col_2 bold text_center"><%= object.document.price.to_s %></div>
+            <div class="col_10 text_right bold text_top">Без налога (НДС):</div>
+            <div class="col_2 bold text_center"> - </div>
+        </div>
+
+        <div class="row">
+            <div class="col_12 text_xx_small">
+                Всего оказано услуг 1, на сумму 
+                <%= number_to_currency(object.document.price, unit: "руб.", format: "%n %u", delimiter: " ") %>
+            </div>
+            <div class="col_12 bold">
+                <%= object.document.price.to_s.split(".").first.to_i.to_words %> рублей 
+                <%= object.document.price.to_s.split(".").second.to_i.to_words %> копеек
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col_12">Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг не имеет.</div>
+        </div>
+
+        <div class="row">
+            <div class="col_5">
+                <span class="bold">Исполнитель</span><br>
+                <span class="text_xx_small">Директор</span>
+            </div>
+            <div class="col_1"></div>
+            <div class="col_6">
+                <span class="bold">Заказчик</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col_5 bottom_bordered"></div>
+            <div class="col_1"></div>
+            <div class="col_6 bottom_bordered"></div>
+        </div>
+        <div class="row" id="director_name_description">
+            <div class="col_5 text_center text_xx_small"><%= object.legal_entity.director_name %></div>
+        </div>
+        <div class="row">
+          <% if object.stamp_file %><img id="stamp" src="data:image/png;base64,<%= Base64.encode64(object.stamp_file.read) %>" alt=""><% end %>
+        </div>
+    </div>
+</body>
+
+</html>

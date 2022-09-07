@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+/*наведение мышью на строки таблиц*/
+body #wrapper .navbar-nav .nav-item.active .nav-link,
+body .ReactTable .rt-tbody .rt-tr-group:hover {
+  color: #333333;
+  background: rgba(235, 232, 232, 0.356);
+}
+body .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+  background: none;
+}
