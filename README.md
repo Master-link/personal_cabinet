@@ -27,7 +27,7 @@
  ```
 sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' website
 ```
-5. как будет известен ip бэка остановить docker-compose (Секд+С)  и заменить полученный ip в frontend/.env, менять толдько ip
+5. как будет известен ip бэка остановить docker-compose (Ctrl+С)  и заменить полученный ip в frontend/.env, менять толдько ip
 6. выяснить ip фронта (можно просто открыть http://192.168.10.5:3010/)
 ```
 sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' frontend
