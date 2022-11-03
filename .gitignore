@@ -26,10 +26,6 @@
 
 .byebug_history
 
-config/config.yml
-/config/database.yml
-.ruby-version
-
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
 .idea/
@@ -42,5 +38,3 @@ config/secrets.yml.key
 /public/reports/*
 /public/__reports/*
 /submodules/*
-/solr/*
-/solr/
