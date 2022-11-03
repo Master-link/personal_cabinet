@@ -20,7 +20,7 @@
 1. sudo docker-compose run frontend yarn
 2. sudo docker-compose down
 3. sudo docker-compose up --build (потом только sudo docker-compose up)
-4  sudo chmod 666 log/development.log
+4.  sudo chmod 666 log/development.log
 5. sudo docker-compose exec --user "$(id -u):$(id -g)" website rails db:create
 6. sudo docker-compose exec --user "$(id -u):$(id -g)" website rails db:migrate
 7. sudo docker-compose exec --user "$(id -u):$(id -g)" website rails db:seed
