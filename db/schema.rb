@@ -15,43 +15,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
-    t.bigint "subscription_id"
-    t.string "name"
-    t.integer "spend_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["subscription_id"], name: "index_accounts_on_subscription_id"
-  end
-
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.string "service_name", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
   create_table "alert_settings", force: :cascade do |t|
     t.string "name"
     t.bigint "client_id"
@@ -95,31 +58,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
-  end
-
-  create_table "callbot_consumptions", force: :cascade do |t|
-    t.integer "count", default: 0
-    t.decimal "summ", default: "0.0"
-    t.date "period"
-    t.bigint "client_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_callbot_consumptions_on_client_id"
-    t.index ["period"], name: "index_callbot_consumptions_on_period"
-  end
-
-  create_table "cb_dailystats", force: :cascade do |t|
-    t.date "period"
-    t.integer "count", default: 0
-    t.integer "old_count", default: 0
-    t.decimal "price", default: "0.0"
-    t.integer "client_id"
-    t.integer "sms_consumption_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_cb_dailystats_on_client_id"
-    t.index ["period"], name: "index_cb_dailystats_on_period"
-    t.index ["sms_consumption_id"], name: "index_cb_dailystats_on_sms_consumption_id"
   end
 
   create_table "claims", force: :cascade do |t|
@@ -219,22 +157,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "dailystats", force: :cascade do |t|
-    t.date "period"
-    t.string "login"
-    t.string "operator"
-    t.string "sms_type"
-    t.string "status"
-    t.integer "clientsms"
-    t.integer "client_id"
-    t.integer "route_id"
-    t.integer "count"
-    t.integer "old_count"
-    t.decimal "price", precision: 6, scale: 2, default: "0.0"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "documents", force: :cascade do |t|
     t.bigint "client_id"
     t.bigint "tariff_id"
@@ -298,27 +220,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "newaccounts", force: :cascade do |t|
-    t.string "crm"
-    t.text "name"
-    t.integer "spend_time"
-    t.integer "final_spend_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "client_comment"
-    t.integer "appeal_id"
-  end
-
-  create_table "news", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "clients_read_id"
-    t.index ["clients_read_id"], name: "index_news_on_clients_read_id"
-  end
-
   create_table "nomenclatures", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -371,68 +272,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.index ["smsable_type", "smsable_id"], name: "index_opsms_on_smsable"
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.decimal "amount", precision: 15, scale: 2
-    t.bigint "client_id"
-    t.bigint "service_id"
-    t.string "status"
-    t.string "payments_statuses"
-    t.string "provider_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "kind"
-    t.jsonb "jsondata", default: {}
-    t.index ["client_id"], name: "index_payments_on_client_id"
-    t.index ["service_id"], name: "index_payments_on_service_id"
-  end
-
-  create_table "qa_answers", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "question_id"
-    t.bigint "parent_answer_id"
-    t.integer "rating_sum", default: 0
-    t.text "value", null: false
-    t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["parent_answer_id"], name: "index_qa_answers_on_parent_answer_id"
-    t.index ["question_id"], name: "index_qa_answers_on_question_id"
-    t.index ["user_id"], name: "index_qa_answers_on_user_id"
-  end
-
-  create_table "qa_categories", force: :cascade do |t|
-    t.string "title", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "sort", default: 0
-    t.jsonb "jsondata", default: {}
-  end
-
-  create_table "qa_questions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "category_id"
-    t.integer "rating_sum", default: 0
-    t.text "value", null: false
-    t.string "status"
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
-    t.index ["category_id"], name: "index_qa_questions_on_category_id"
-    t.index ["user_id"], name: "index_qa_questions_on_user_id"
-  end
-
-  create_table "qa_ratings", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "ratingable_type"
-    t.bigint "ratingable_id"
-    t.integer "value", limit: 2, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ratingable_type", "ratingable_id"], name: "index_qa_ratings_on_ratingable"
-    t.index ["user_id"], name: "index_qa_ratings_on_user_id"
-  end
-
   create_table "queuelogs", force: :cascade do |t|
     t.bigint "user_id"
     t.string "state"
@@ -477,22 +316,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
-  create_table "sentsms", force: :cascade do |t|
-    t.bigint "sms_consumption_id"
-    t.integer "extid"
-    t.string "login"
-    t.string "status"
-    t.string "operator"
-    t.string "uid"
-    t.string "phone_number"
-    t.string "message"
-    t.datetime "status_changed_at"
-    t.integer "routeid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["sms_consumption_id"], name: "index_sentsms_on_sms_consumption_id"
-  end
-
   create_table "service_balances", force: :cascade do |t|
     t.bigint "client_id"
     t.bigint "service_id"
@@ -519,17 +342,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.text "agreement"
     t.index ["currency_id"], name: "index_services_on_currency_id"
     t.index ["legal_entity_id"], name: "index_services_on_legal_entity_id"
-  end
-
-  create_table "sms_consumptions", force: :cascade do |t|
-    t.integer "sentsmses_count", default: 0
-    t.decimal "summ", precision: 15, scale: 2, default: "0.0"
-    t.date "period"
-    t.bigint "client_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_sms_consumptions_on_client_id"
-    t.index ["period"], name: "index_sms_consumptions_on_period"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -562,32 +374,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_tariffs_on_deleted_at"
     t.index ["service_id"], name: "index_tariffs_on_service_id"
-  end
-
-  create_table "taxophones", force: :cascade do |t|
-    t.bigint "client_id"
-    t.string "vtm"
-    t.json "geo_objects"
-    t.json "crew_groups"
-    t.json "tf_tm_options"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_taxophones_on_client_id"
-  end
-
-  create_table "tmstats", force: :cascade do |t|
-    t.bigint "crm_id"
-    t.integer "time"
-    t.integer "before_count"
-    t.integer "after_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "newaccount_id"
-    t.string "kind"
-    t.bigint "user_id"
-    t.index ["crm_id"], name: "index_tmstats_on_crm_id"
-    t.index ["newaccount_id"], name: "index_tmstats_on_newaccount_id"
-    t.index ["user_id"], name: "index_tmstats_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -639,11 +425,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
     t.index ["user_id"], name: "index_users_signins_on_user_id"
   end
 
-  add_foreign_key "accounts", "subscriptions"
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "alert_settings", "clients"
-  add_foreign_key "callbot_consumptions", "clients"
   add_foreign_key "claims", "clients"
   add_foreign_key "claims", "services"
   add_foreign_key "claims", "tariffs"
@@ -660,34 +442,19 @@ ActiveRecord::Schema.define(version: 2022_05_31_092947) do
   add_foreign_key "employees_users", "users"
   add_foreign_key "geographies", "countries"
   add_foreign_key "geographies", "services"
-  add_foreign_key "news", "clients_reads"
   add_foreign_key "nomenclatures_tariffs", "nomenclatures"
   add_foreign_key "nomenclatures_tariffs", "tariffs"
   add_foreign_key "ntf_messages", "ntf_categories", column: "category_id"
-  add_foreign_key "payments", "clients"
-  add_foreign_key "payments", "services"
-  add_foreign_key "qa_answers", "qa_answers", column: "parent_answer_id"
-  add_foreign_key "qa_answers", "qa_questions", column: "question_id"
-  add_foreign_key "qa_answers", "users"
-  add_foreign_key "qa_questions", "qa_categories", column: "category_id"
-  add_foreign_key "qa_questions", "users"
-  add_foreign_key "qa_ratings", "users"
   add_foreign_key "queuelogs", "users"
   add_foreign_key "resolutions_roles", "resolutions"
   add_foreign_key "resolutions_roles", "roles"
-  add_foreign_key "sentsms", "sms_consumptions"
   add_foreign_key "service_balances", "clients"
   add_foreign_key "service_balances", "services"
   add_foreign_key "services", "currencies"
   add_foreign_key "services", "legal_entities"
-  add_foreign_key "sms_consumptions", "clients"
   add_foreign_key "subscriptions", "clients"
   add_foreign_key "subscriptions", "tariffs"
   add_foreign_key "tariffs", "services"
-  add_foreign_key "taxophones", "clients"
-  add_foreign_key "tmstats", "crms"
-  add_foreign_key "tmstats", "newaccounts"
-  add_foreign_key "tmstats", "users"
   add_foreign_key "transactions", "clients"
   add_foreign_key "transactions", "services"
   add_foreign_key "transactions", "subscriptions"
