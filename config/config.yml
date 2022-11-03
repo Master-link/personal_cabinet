@@ -1,0 +1,11 @@
+development:
+  users_documents_folder: "public/users_documents"
+  stamps_folder: "public"
+  frontend: "http://172.19.0.6:3010"
+  change_password: "/set_password"
+  mail_from_host: "no-reply@application.ru"
+  mail_reply: "no-reply@application.ru"
+  mail_return_path: "no-reply@application.ru"
+  admin_mail: [ "admin@mail.ru"]
+  1c_upload_path: "public/payments_1c"
+  payment_report_folder: "public/reports"
